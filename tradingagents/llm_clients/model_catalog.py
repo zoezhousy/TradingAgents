@@ -76,6 +76,20 @@ MODEL_OPTIONS: ProviderModeOptions = {
             ("Custom model ID", "custom"),
         ],
     },
+    "siliconflow": {
+        "quick": [
+            ("DeepSeek V4 Flash (SiliconFlow)", "deepseek-ai/DeepSeek-V4-Flash"),
+            ("DeepSeek V4 Pro (SiliconFlow)", "deepseek-ai/DeepSeek-V4-Pro"),
+            ("Qwen QwQ-32B (SiliconFlow)", "Qwen/QwQ-32B"),
+            ("Custom model ID", "custom"),
+        ],
+        "deep": [
+            ("DeepSeek V4 Pro (SiliconFlow)", "deepseek-ai/DeepSeek-V4-Pro"),
+            ("DeepSeek V4 Flash (SiliconFlow)", "deepseek-ai/DeepSeek-V4-Flash"),
+            ("Qwen QwQ-32B (SiliconFlow)", "Qwen/QwQ-32B"),
+            ("Custom model ID", "custom"),
+        ],
+    },
     "qwen": {
         "quick": [
             ("Qwen 3.5 Flash", "qwen3.5-flash"),

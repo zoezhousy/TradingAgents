@@ -19,6 +19,7 @@ from langchain_core.prompt_values import ChatPromptValue
 from tradingagents.llm_clients.openai_client import (
     DeepSeekChatOpenAI,
     NormalizedChatOpenAI,
+    OpenAIClient,
     _input_to_messages,
 )
 
@@ -167,3 +168,14 @@ class TestBaseClassIsolation:
             NormalizedChatOpenAI._get_request_payload
             is NormalizedChatOpenAI.__bases__[0]._get_request_payload
         )
+
+
+@pytest.mark.unit
+class TestSiliconFlowDeepSeekRouting:
+    def test_siliconflow_uses_deepseek_chat_cls(self):
+        os.environ.setdefault("SILICONFLOW_API_KEY", "placeholder")
+        llm = OpenAIClient(
+            model="deepseek-ai/DeepSeek-V4-Flash",
+            provider="siliconflow",
+        ).get_llm()
+        assert isinstance(llm, DeepSeekChatOpenAI)

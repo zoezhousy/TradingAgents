@@ -113,6 +113,7 @@ _PASSTHROUGH_KWARGS = (
 _PROVIDER_CONFIG = {
     "xai": ("https://api.x.ai/v1", "XAI_API_KEY"),
     "deepseek": ("https://api.deepseek.com", "DEEPSEEK_API_KEY"),
+    "siliconflow": ("https://api.siliconflow.com/v1", "SILICONFLOW_API_KEY"),
     "qwen": ("https://dashscope-intl.aliyuncs.com/compatible-mode/v1", "DASHSCOPE_API_KEY"),
     "glm": ("https://api.z.ai/api/paas/v4/", "ZHIPU_API_KEY"),
     "openrouter": ("https://openrouter.ai/api/v1", "OPENROUTER_API_KEY"),
@@ -169,9 +170,13 @@ class OpenAIClient(BaseLLMClient):
         if self.provider == "openai":
             llm_kwargs["use_responses_api"] = True
 
-        # DeepSeek's thinking-mode quirks live in their own subclass so the
-        # base NormalizedChatOpenAI stays free of provider-specific branches.
-        chat_cls = DeepSeekChatOpenAI if self.provider == "deepseek" else NormalizedChatOpenAI
+        # DeepSeek-thinking models behind both native DeepSeek and
+        # SiliconFlow require reasoning_content round-trip.
+        chat_cls = (
+            DeepSeekChatOpenAI
+            if self.provider in ("deepseek", "siliconflow")
+            else NormalizedChatOpenAI
+        )
         return chat_cls(**llm_kwargs)
 
     def validate_model(self) -> bool:

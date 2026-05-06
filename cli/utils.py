@@ -237,6 +237,7 @@ def select_llm_provider() -> tuple[str, str | None]:
         ("Anthropic", "anthropic", "https://api.anthropic.com/"),
         ("xAI", "xai", "https://api.x.ai/v1"),
         ("DeepSeek", "deepseek", "https://api.deepseek.com"),
+        ("SiliconFlow", "siliconflow", "https://api.siliconflow.com/v1"),
         ("Qwen", "qwen", "https://dashscope.aliyuncs.com/compatible-mode/v1"),
         ("GLM", "glm", "https://open.bigmodel.cn/api/paas/v4/"),
         ("OpenRouter", "openrouter", "https://openrouter.ai/api/v1"),
